@@ -23,7 +23,7 @@
             position: relative;
         }
 
-        /* Animated background particles */
+
         .particles {
             position: absolute;
             top: 0;
@@ -116,6 +116,60 @@
             51%, 100% { opacity: 0; }
         }
 
+        .logos-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            background: transparent;
+            transition: transform 0.3s ease;
+            filter: grayscale(1) brightness(0.7) drop-shadow(0 0 10px rgba(0, 255, 255, 0.3));
+            mix-blend-mode: screen;
+            animation: colorWave 8s infinite ease-in-out;
+        }
+
+        .logo:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .logo:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .logo:nth-child(3) {
+            animation-delay: 2s;
+        }
+
+        .logo:nth-child(4) {
+            animation-delay: 3s;
+        }
+
+        @keyframes colorWave {
+            0%, 70% {
+                filter: grayscale(1) brightness(0.7) drop-shadow(0 0 10px rgba(0, 255, 255, 0.3));
+            }
+            85% {
+                filter: grayscale(0) brightness(1.1) drop-shadow(0 0 20px rgba(0, 255, 255, 0.8));
+            }
+            100% {
+                filter: grayscale(1) brightness(0.7) drop-shadow(0 0 10px rgba(0, 255, 255, 0.3));
+            }
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+            filter: grayscale(0) brightness(1) drop-shadow(0 0 20px rgba(0, 255, 255, 0.6)) !important;
+            animation-play-state: paused;
+        }
+
         .subtitle {
             font-size: 1rem;
             color: rgba(255, 255, 255, 0.7);
@@ -123,7 +177,7 @@
             letter-spacing: 2px;
         }
 
-        /* Glitch effect */
+
         .glitch {
             position: relative;
             display: inline-block;
@@ -169,13 +223,20 @@
             }
         }
 
-        /* Responsive design */
+
         @media (max-width: 768px) {
             .main-title {
                 font-size: 2rem;
             }
             .typing-text {
                 font-size: 1rem;
+            }
+            .logos-container {
+                gap: 1rem;
+            }
+            .logo {
+                width: 50px;
+                height: 50px;
             }
         }
     </style>
@@ -187,10 +248,16 @@
         <div class="typing-container">
             <span class="typing-text" id="typing-text"></span><span class="cursor"></span>
         </div>
+        
+        <div class="logos-container">
+            <img src="1.png" alt="Logo 1" class="logo">
+            <img src="2.png" alt="Logo 2" class="logo">
+            <img src="3.png" alt="Logo 3" class="logo">
+            <img src="4.png" alt="Logo 4" class="logo">
+        </div>
     </div>
 
     <script>
-        // Create floating particles
         function createParticles() {
             const particles = document.getElementById('particles');
             for (let i = 0; i < 50; i++) {
@@ -203,7 +270,6 @@
             }
         }
 
-        // Typing animation
         const contracts = ['NQ', 'ES', 'CL', 'GC'];
         let currentContract = 0;
         let currentChar = 0;
@@ -220,11 +286,11 @@
                 if (currentChar === 0) {
                     isDeleting = false;
                     currentContract = (currentContract + 1) % contracts.length;
-                    setTimeout(typeWriter, 500); // Pause before typing next
+                    setTimeout(typeWriter, 500);
                     return;
                 }
                 
-                setTimeout(typeWriter, 100); // Faster deletion
+                setTimeout(typeWriter, 100);
             } else {
                 typingElement.textContent = current.substring(0, currentChar + 1);
                 currentChar++;
@@ -233,17 +299,16 @@
                     setTimeout(() => {
                         isDeleting = true;
                         typeWriter();
-                    }, 2000); // Pause when complete
+                    }, 2000);
                     return;
                 }
                 
-                setTimeout(typeWriter, 200); // Typing speed
+                setTimeout(typeWriter, 200);
             }
         }
 
-        // Initialize
         createParticles();
-        setTimeout(typeWriter, 1000); // Start typing after 1 second
+        setTimeout(typeWriter, 1000);
     </script>
 </body>
 </html>
