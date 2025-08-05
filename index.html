@@ -137,35 +137,6 @@
             }
         }
 
-        .typing-container {
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 2rem 0;
-            position: relative;
-        }
-
-        .typing-text {
-            font-size: 1.2rem;
-            color: #00ff00;
-            font-weight: bold;
-            text-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
-            display: inline-block;
-        }
-
-        .cursor {
-            display: inline-block;
-            width: 2px;
-            height: 1.2em;
-            background-color: #00ff00;
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
 
         .logos-container {
             display: flex;
@@ -440,9 +411,6 @@
             .main-title {
                 font-size: 2rem;
             }
-            .typing-text {
-                font-size: 1rem;
-            }
             .logos-container {
                 gap: 1rem;
             }
@@ -496,9 +464,6 @@
             FutuCopy is a cloud-based trade copier for futures traders, with support for all leading brokerage platforms. Our expected launch date is Q4 2025.
         </div>
 
-        <div class="typing-container">
-            <span class="typing-text" id="typing-text"></span><span class="cursor"></span>
-        </div>
         
         <div class="logos-container">
             <img src="1.png" alt="Logo 1" class="logo">
@@ -547,42 +512,6 @@
             }
         }
 
-        const contracts = ['NQ', 'ES', 'CL', 'GC'];
-        let currentContract = 0;
-        let currentChar = 0;
-        let isDeleting = false;
-        const typingElement = document.getElementById('typing-text');
-        
-        function typeWriter() {
-            const current = contracts[currentContract];
-            
-            if (isDeleting) {
-                typingElement.textContent = current.substring(0, currentChar - 1);
-                currentChar--;
-                
-                if (currentChar === 0) {
-                    isDeleting = false;
-                    currentContract = (currentContract + 1) % contracts.length;
-                    setTimeout(typeWriter, 500);
-                    return;
-                }
-                
-                setTimeout(typeWriter, 100);
-            } else {
-                typingElement.textContent = current.substring(0, currentChar + 1);
-                currentChar++;
-                
-                if (currentChar === current.length) {
-                    setTimeout(() => {
-                        isDeleting = true;
-                        typeWriter();
-                    }, 2000);
-                    return;
-                }
-                
-                setTimeout(typeWriter, 200);
-            }
-        }
 
         document.getElementById('emailForm').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -631,7 +560,6 @@
         });
 
         createParticles();
-        setTimeout(typeWriter, 1000);
     </script>
 </body>
 </html>
